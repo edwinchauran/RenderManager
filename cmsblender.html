@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta name="viewport" content="width-device-width, initiial-scale=1, shrink-to-fit=no"
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+	<title>Blender CMS</title>
+	<script type="text/javascript">
+		var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+		
+		function startDB() {
+
+			dataBase = indexedDB.open("BlenderDB", 1);
+
+			dataBase.onupgradeneeded = function (e) {
+				
+				active = dataBase.result;
+
+				object = active.createObjetctStore("corto", {keyPath : "id", autoIncrement : true});
+
+				object.createIndex("by_name", "name", {unique: false});
+				object.createIndex("by_dni","dni", {unique :true});
+			};
+			
+			dataBase.onsuccess = function (e) {
+				alert("Base de datos cargada correctamente");
+			};
+			
+			dataBase.oneerror = function (e) {
+				alert("Error cargando la base de datos");
+			};
+		}
+		
+	</script>
+</head>
+<nav class="navbar">
+	
+</nav>
+<body onload="startDB();" class="bg-dark">
+	<div class="row">
+		<div class="col-sm-2">
+			<h1>fuck</h1>
+		</div>
+		<div class="col-sm-10">	
+
+
+ <table class="table table-sm table-striped table-hover table-dark">
+ 	<thead>
+ 		<tr>
+		 	<th>Name</th>
+		 	<th>Size</th>
+		 	<th>Directory</th>
+		 	<th>Status</th>
+ 		</tr>
+ 	</thead>
+ 	<tbody>
+		<tr >
+	 		<td>shot0001</td>
+		 	<td>1231kb</td>
+		 	<td>Blender/Render</td>
+		 	<td class="bg-success">Done</td>
+	 	</tr>
+
+		 <tr class="">
+		 	<td>shot0001</td>
+		 	<td>1231kb</td>
+		 	<td>Blender/Render</td>
+		 	<td class="bg-success">Done</td>
+	 	</tr>
+
+		 <tr class="">
+		 	<td>shot0001</td>
+		 	<td>1231kb</td>
+		 	<td>Blender/Render</td>
+		 	<td class="bg-primary">waiting</td>
+	 	</tr>
+ 	</tbody>
+ </table>
+ </div>
+</div>
+
+
+
+
+
+</body>
+	<script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+</html>
